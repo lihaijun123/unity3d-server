@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+			http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+
+	<context:property-placeholder location="classpath:/context/properties/config.properties,classpath:/context/properties/context.properties" />
+
+	<!--扫描controller注解类-->
+	<context:component-scan base-package="com.focustech.cief.filemanage" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!--
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+	<bean id="handlerAdapter"
+		class="com.focustech.oss2008.web.adapter.OssAnnotationMethodHandlerAdapter">
+		<property name="webBindingInitializers">
+			<list>
+				<bean class="com.focustech.oss2008.web.OssWebBindingInitializer" />
+			</list>
+		</property>
+	</bean>
+		- This bean resolves specific types of exceptions to corresponding logical
+		- view names for error views. The default behaviour of DispatcherServlet
+		- is to propagate all exceptions to the servlet container: this will happen
+		- here with all other types of exceptions.
+	<bean
+		class="com.focustech.oss2008.web.filter.OssSimpleMappingExceptionResolver"
+		p:warnLogCategory="focus_oss" p:defaultErrorView="error">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.io.IOException" />
+			</props>
+		</property>
+	</bean>
+	-->
+</beans>

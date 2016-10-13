@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.cglib.use_reflection_optimizer">true</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="show_sql">false</property>
+		<property name="format_sql">false</property>
+		<mapping class="com.focustech.cief.filemanage.dataserver.model.FileServer" />
+		<mapping class="com.focustech.cief.filemanage.dataserver.model.PicInfo" />
+		<mapping class="com.focustech.cief.filemanage.dataserver.model.AlbumInfo" />
+		<mapping class="com.focustech.cief.filemanage.dataserver.model.AttachInfo" />
+		<mapping class="com.focustech.cief.filemanage.dataserver.model.AudioInfo" />
+		<mapping class="com.focustech.cief.filemanage.dataserver.model.ModelInfo" />
+		<mapping class="com.focustech.cief.filemanage.dataserver.model.PanoramaInfo" />
+		<mapping class="com.focustech.cief.filemanage.dataserver.model.VideoInfo" />
+		<mapping class="com.focustech.cief.filemanage.dataserver.model.OtherFile" />
+		<mapping class="com.focustech.cief.filemanage.dataserver.model.FileBlock" />
+		<mapping class="com.focustech.cief.filemanage.dataserver.model.FileBlockServer" />
+		<!--hx-->
+		<mapping class="com.focustech.cief.filemanage.hx.model.XmlInfo" />
+		<mapping class="com.focustech.cief.filemanage.hx.model.XmlDetail" />
+		<mapping class="com.focustech.cief.filemanage.hx.model.HxInfo" />
+		<mapping class="com.focustech.cief.filemanage.hx.model.HxDownload" />
+
+		<mapping class="com.focustech.cief.filemanage.user.model.UserInfo" />
+		<!--log -->
+		<mapping class="com.focustech.cief.filemanage.log.model.StatScanImgLog" />
+		<mapping class="com.focustech.cief.filemanage.log.model.StatAppUseTimeLog" />
+		<!-- app -->
+		<mapping class="com.focustech.cief.filemanage.app.model.AppInfo" />
+		<mapping class="com.focustech.cief.filemanage.app.model.AppInfoDetail" />
+	</session-factory>
+</hibernate-configuration>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="true">
+	<appender name="WEBAPP" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="/home/cief/filemanage/dataserver_webapp.log" />
+		<param name="append" value="true" />
+		<param name="MaxFileSize" value="100MB" />
+		<param name="MaxBackupIndex" value="10" />
+		<param name="ImmediateFlush" value="true"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p %C - %m%n" />
+		</layout>
+	</appender>
+	<appender name="SERVER-APP" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="/home/cief/filemanage/dataserver-app-base.log" />
+		<param name="append" value="true" />
+		<param name="MaxFileSize" value="100MB" />
+		<param name="MaxBackupIndex" value="10" />
+		<param name="ImmediateFlush" value="true"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p %C - %m%n" />
+		</layout>
+	</appender>
+	<appender name="as_SERVER-APP" class="org.apache.log4j.AsyncAppender">
+			<param name="BufferSize" value="512"/>
+			<appender-ref ref="SERVER-APP" />
+	</appender>
+	<appender name="as_WEBAPP" class="org.apache.log4j.AsyncAppender">
+			<param name="BufferSize" value="512"/>
+			<appender-ref ref="WEBAPP" />
+	</appender>
+	<!-- ========================================================================================================== -->
+	<appender name="cief_filemanage" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="/home/cief/filemanage/cief_dataserver.log" />
+		<param name="append" value="true" />
+		<param name="MaxFileSize" value="100MB" />
+		<param name="MaxBackupIndex" value="10" />
+		<param name="ImmediateFlush" value="true"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p %C - %m%n" />
+		</layout>
+	</appender>
+	<appender name="focus_oss_hibernate" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="/home/cief/filemanage/dataserver_hibernate.log" />
+		<param name="append" value="true" />
+		<param name="MaxFileSize" value="100MB" />
+		<param name="MaxBackupIndex" value="10" />
+		<param name="ImmediateFlush" value="true"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p %C - %m%n" />
+		</layout>
+	</appender>
+	<appender name="filemanage_spring" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="/home/cief/filemanage/dataserver_spring.log" />
+		<param name="append" value="true" />
+		<param name="MaxFileSize" value="100MB" />
+		<param name="MaxBackupIndex" value="10" />
+		<param name="ImmediateFlush" value="true"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p %C - %m%n" />
+		</layout>
+	</appender>
+	<appender name="as_filemanage_hibernate" class="org.apache.log4j.AsyncAppender">
+			<param name="BufferSize" value="512"/>
+			<appender-ref ref="filemanage_hibernate" />
+	</appender>
+	<appender name="as_filemanage_spring" class="org.apache.log4j.AsyncAppender">
+			<param name="BufferSize" value="512"/>
+			<appender-ref ref="filemanage_spring" />
+	</appender>
+	<appender name="as_cief_filemanage" class="org.apache.log4j.AsyncAppender">
+			<param name="BufferSize" value="512"/>
+			<appender-ref ref="cief_filemanage" />
+	</appender>
+    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                value="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p %C - %m%n" />
+        </layout>
+    </appender>
+	<!-- ========================================================================================================== -->
+	<root>
+		<level value="debug" />
+		<appender-ref ref="console" />
+	</root>
+	<logger name="SERVER_APP" additivity="true">
+		<level value="error" />
+	</logger>
+	<logger name="WEB-APP" additivity="false">
+		<level value="error" />
+		<appender-ref ref="as_WEBAPP" />
+	</logger>
+	<logger name="focus_oss" additivity="false">
+		<level value="error" />
+		<appender-ref ref="as_cief_filemanage" />
+	</logger>
+	<logger name="org.hibernate" additivity="false">
+		<level value="error" />
+		<appender-ref ref="as_filemanage_hibernate" />
+	</logger>
+	<logger name="org.springframework" additivity="false">
+		<level value="error" />
+		<appender-ref ref="as_filemanage_spring" />
+	</logger>
+	<logger name="com.focustech.focus3d.cache" additivity="false">
+		<level value="error" />
+		<appender-ref ref="console"/>
+	</logger>
+	<logger name="com.focustech.cief.filemanage.dataserver" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="console"/>
+	</logger>
+</log4j:configuration>

@@ -1,0 +1,29 @@
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>assets</key>
+			<array>
+				<dict>
+					<key>kind</key>
+					<string>software-package</string>
+					<key>url</key>
+					<string>HTTPS_SERVER_URL/fs/appbk/APP_ID.ipa</string>
+				</dict>
+			</array>
+			<key>metadata</key>
+			<dict>
+				<key>bundle-identifier</key>
+				<string>PK_CODE</string>
+				<key>bundle-version</key>
+				<string>APP_VERSION</string>
+				<key>kind</key>
+				<string>software</string>
+				<key>title</key>
+				<string>APP_NAME</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+	<!--服务器节点配置信息-->
+	<bean id="dataServer" class="com.focustech.focus3d.bundle.fileserver.data.api.DataServerNode">
+		<property name="sn" value="${dataserver.sn}"/>
+		<property name="name" value="${dataserver.name}"/>
+		<property name="serverIp" value="${dataserver.ip}"/>
+		<property name="serverDomain" value=""/>
+		<property name="serverPort" value="${dataserver.port}"/>
+		<property name="registryCenterPort" value="8099"/>
+		<property name="rootFoldName" value="${dataserver.uploadfold.name}"/>
+		<property name="fileRootPath" value="${dataserver.uploadfold.parent.dir}"/>
+		<property name="maxFileAmount" value="200000"/>
+		<property name="subFoldAmount" value="2000"/>
+		<property name="hardDiscsCapacity" value="800000000"/>
+		<property name="fileType" value="0"/>
+		<property name="flagUsable" value="1"/>
+	</bean>
+
+	<bean id="httpVisitUrl" class="com.focustech.cief.filemanage.dataserver.HttpVisitUrl">
+		<property name="httpPrefix" value="${dataserver.file.visit.url}"/>
+	</bean>
+
+	<bean id="serverProviderClient" class="com.focustech.cief.filemanage.dataserver.heartbeat.ServerProviderClient" init-method="start">
+		<property name="serverNode" ref="dataServer"/>
+	</bean>
+
+
+
+</beans>

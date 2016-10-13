@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN" "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+
+<taglib>
+
+	<tlib-version>2.5</tlib-version>
+	<jsp-version>1.2</jsp-version>
+	<short-name>focus</short-name>
+	<uri>http://www.focuschina.com/tags/focus</uri>
+	<description>
+		focuschina oss Framework JSP Form Tag Library
+	</description>
+
+	<!-- <form:form/> tag -->
+	<tag>
+		<name>complex</name>
+		<tag-class>
+			com.focustech.extend.spring.web.tag.FComplexHtmlElementTag
+		</tag-class>
+		<body-content>JSP</body-content>
+		<description>
+			Renders an HTML 'focus' tag and exposes a binding path to
+			inner tags for binding.
+		</description>
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				HTML Standard Attribute - added for backwards
+				compatibility cases
+			</description>
+		</attribute>
+		<attribute>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Standard Attribute</description>
+		</attribute>
+		<attribute>
+			<name>paramType</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				HTML Standard Attribute - added for backwards
+				compatibility cases
+			</description>
+		</attribute>
+		<attribute>
+			<name>siteType</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				HTML Standard Attribute - added for backwards
+				compatibility cases
+			</description>
+		</attribute>
+		<attribute>
+			<name>type</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				HTML Standard Attribute - added for backwards
+				compatibility cases
+			</description>
+		</attribute>
+		<attribute>
+			<name>items</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				HTML Standard Attribute - added for backwards
+				compatibility cases
+			</description>
+		</attribute>
+		<attribute>
+			<name>defaultValue</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				HTML Standard Attribute - added for backwards
+				compatibility cases
+			</description>
+		</attribute>
+		<attribute>
+			<name>otherAttrs</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				HTML Standard Attribute - added for backwards
+				compatibility cases
+			</description>
+		</attribute>
+        <attribute>
+            <name>exceptItems</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>
+                HTML Standard Attribute - added for backwards
+                compatibility cases
+            </description>
+        </attribute>
+		<attribute>
+			<name>firstItemText</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				HTML Standard Attribute - added for backwards
+				compatibility cases
+			</description>
+		</attribute>
+		<attribute>
+			<name>firstItemValue</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				HTML Standard Attribute - added for backwards
+				compatibility cases
+			</description>
+		</attribute>
+
+		<attribute>
+			<name>itemValue</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				HTML Standard Attribute - added for backwards
+				compatibility cases
+			</description>
+		</attribute>
+		<attribute>
+			<name>itemLabel</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				HTML Standard Attribute - added for backwards
+				compatibility cases
+			</description>
+		</attribute>
+	</tag>
+	<tag>
+		<name>SystemParamTag</name>
+		<tag-class>
+			com.focustech.extend.spring.web.tag.SystemParamTag
+		</tag-class>
+		<body-content>JSP</body-content>
+		<description>SystemParamTag</description>
+		<attribute>
+			<name>paramKey</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>paramType</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>siteType</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>默认值为1</description>
+		</attribute>
+	</tag>
+	<tag>
+		<name>dateInput</name>
+		<tag-class>
+			com.focustech.extend.spring.web.tag.DateInputTag
+		</tag-class>
+		<body-content>empty</body-content>
+		<description>
+			Renders an HTML 'input' tag with type 'text' using the bound
+			value.
+		</description>
+		<attribute>
+			<name>path</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>Path to property for data binding</description>
+		</attribute>
+		<attribute>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Standard Attribute</description>
+		</attribute>
+		<attribute>
+			<name>htmlEscape</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				Enable/disable HTML escaping of rendered values.
+			</description>
+		</attribute>
+		<attribute>
+			<name>cssClass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				Equivalent to "class" - HTML Optional Attribute
+			</description>
+		</attribute>
+		<attribute>
+			<name>cssErrorClass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				Equivalent to "class" - HTML Optional Attribute. Used
+				when the bound field has errors.
+			</description>
+		</attribute>
+		<attribute>
+			<name>cssStyle</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				Equivalent to "style" - HTML Optional Attribute
+			</description>
+		</attribute>
+		<attribute>
+			<name>lang</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Standard Attribute</description>
+		</attribute>
+		<attribute>
+			<name>title</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Standard Attribute</description>
+		</attribute>
+		<attribute>
+			<name>dir</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Standard Attribute</description>
+		</attribute>
+		<attribute>
+			<name>tabindex</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Standard Attribute</description>
+		</attribute>
+		<attribute>
+			<name>disabled</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				HTML Optional Attribute. Setting the value of this
+				attribute to 'true' (without the quotes) will disable
+				the HTML element.
+			</description>
+		</attribute>
+		<attribute>
+			<name>onclick</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Event Attribute</description>
+		</attribute>
+		<attribute>
+			<name>ondblclick</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Event Attribute</description>
+		</attribute>
+		<attribute>
+			<name>onmousedown</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Event Attribute</description>
+		</attribute>
+		<attribute>
+			<name>onmouseup</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Event Attribute</description>
+		</attribute>
+		<attribute>
+			<name>onmouseover</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Event Attribute</description>
+		</attribute>
+		<attribute>
+			<name>onmousemove</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Event Attribute</description>
+		</attribute>
+		<attribute>
+			<name>onmouseout</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Event Attribute</description>
+		</attribute>
+		<attribute>
+			<name>onkeypress</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Event Attribute</description>
+		</attribute>
+		<attribute>
+			<name>onkeyup</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Event Attribute</description>
+		</attribute>
+		<attribute>
+			<name>onkeydown</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Event Attribute</description>
+		</attribute>
+		<attribute>
+			<name>onfocus</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Event Attribute</description>
+		</attribute>
+		<attribute>
+			<name>onblur</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Event Attribute</description>
+		</attribute>
+		<attribute>
+			<name>onchange</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Event Attribute</description>
+		</attribute>
+		<attribute>
+			<name>accesskey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Standard Attribute</description>
+		</attribute>
+		<!-- 'input(text)' specific attributes -->
+		<attribute>
+			<name>size</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Optional Attribute</description>
+		</attribute>
+		<attribute>
+			<name>maxlength</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Optional Attribute</description>
+		</attribute>
+		<attribute>
+			<name>alt</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Optional Attribute</description>
+		</attribute>
+		<attribute>
+			<name>onselect</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Event Attribute</description>
+		</attribute>
+		<attribute>
+			<name>readonly</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				HTML Optional Attribute. Setting the value of this
+				attribute to 'true' (without the quotes) will make the
+				HTML element readonly.
+			</description>
+		</attribute>
+		<attribute>
+			<name>autocomplete</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>Common Optional Attribute</description>
+		</attribute>
+		<attribute>
+			<name>format</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				时间格式，默认为:yyyy-mm-dd HH:mm:ss.其他格式请见DateUtils.
+			</description>
+		</attribute>
+	</tag>
+<tag>
+		<name>CatalogTag</name>
+		<tag-class>com.focustech.extend.spring.web.tag.CatalogTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>Build common html element:text</description>
+		<attribute>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+        <attribute>
+            <name>lanCode</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>语言版本，0-英文版；1-中文版。如果不是这两个数字，则会默认为英文版</description>
+        </attribute>
+        <attribute>
+            <name>suggest</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description></description>
+        </attribute>
+        <attribute>
+            <name>cssPath</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description></description>
+        </attribute>
+        <attribute>
+            <name>jsPath</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description></description>
+        </attribute>
+		<attribute>
+			<name>server</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>size</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		<attribute>
+			<!--为选中值，数据类型为String-->
+			<name>defaultValues</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<!--为最多显示几级目录（1,2,3,4,5）-->
+			<name>maxLevel</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<!--选择目录时，哪几级目录是不可以做出选择的String，格式（,1,2,）-->
+			<name>unLevels</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<!--选择目录时，是否只能单选(0,否\1,是)String-->
+			<name>single</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<!--是否只读(true,false)-->
+			<name>readonly</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<!--是否只可以通过选择修改值(true,false)-->
+			<name>selectonly</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<!--可以添加事件-->
+			<name>event</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<!--是否出现链接目录(true,false)-->
+			<name>hasLinkCatalog</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<!--不能选择那种类型的目录(1:含有子类别的目录\2:不含有子类别的目录)-->
+			<name>unLevelType</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<!--是否从目录缓存中取信息(true,false)-->
+			<name>isFromCache</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<!--是否使用快速选择页面(true,false)-->
+			<name>quickSelect</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>	
+</taglib>

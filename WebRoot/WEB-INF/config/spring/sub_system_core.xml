@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+	<import resource="node_config.xml"/>
+
+	<context:property-placeholder location="classpath:/context/properties/config.properties,classpath:/context/properties/context.properties" />
+
+	<context:component-scan base-package="com.focustech.cief.filemanage" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
+	</context:component-scan>
+
+	<jee:jndi-lookup id="ossDataSource" jndi-name="java:comp/env/jdbc/OssDatabase" />
+	<!--
+	<bean id="ossDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="${datasource.url}" />
+		<property name="username" value="${datasource.username}" />
+		<property name="password" value="${datasource.password}" />
+		<property name="initialSize" value="5" />
+		<property name="maxActive" value="100" />
+		<property name="maxIdle" value="30" />
+		<property name="maxWait" value="500" />
+		<property name="poolPreparedStatements" value="false" />
+		<property name="defaultAutoCommit" value="false" />
+	</bean>
+	-->
+	<bean name="ossSessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="ossDataSource"></property>
+		<property name="configLocation"
+			value="/WEB-INF/config/hibernate/oss_hibernate_config.xml">
+		</property>
+		<property name="namingStrategy" ref="namingStrategy" />
+	</bean>
+
+	<bean id="namingStrategy" class="org.hibernate.cfg.ImprovedNamingStrategy" />
+
+	<!--
+	<bean id="jtaTransactionManager" class="org.springframework.transaction.jta.JtaTransactionManager"/>
+	-->
+	<bean id="jtaTransactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="ossSessionFactory" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="jtaTransactionManager" />
+
+	<bean id="encryptComponent"
+		class="com.focustech.common.codec.encrypter.DefaultEncryptComponentImpl"
+		init-method="initialize">
+		<property name="encryptHandlerClass"
+			value="${encryptcomponent.encrypthandlerclass}" />
+		<property name="encryptPosMap"
+			value="${encryptcomponent.encryptposmap}" />
+		<property name="encryptWheelMap"
+			value="${encryptcomponent.encryptwheelmap}" />
+		<property name="encryptPosMap4Image"
+			value="${encryptcomponent.encryptposmap4image}" />
+		<property name="encryptWheelMap4Image"
+			value="${encryptcomponent.encryptwheelmap4image}" />
+		<property name="unEncryptMinLen" value="${encryptcomponent.unencryptminlen}" />
+		<property name="unEncryptMaxLen" value="${encryptcomponent.unencryptmaxlen}" />
+		<property name="encryptLen" value="${encryptcomponent.encryptlen}" />
+	</bean>
+
+	<bean class="com.focustech.common.utils.SpringContextUtil"/>
+
+	<bean id="messageUtils" class="com.focustech.common.utils.MessageUtils" init-method="init">
+        <property name="validateResource" value="classpath:/context/properties/validation.properties">
+        </property>
+        <property name="exceptionResource" value="classpath:/context/properties/exception.properties">
+        </property>
+        <property name="fieldResource" value="classpath:/context/properties/field.properties">
+        </property>
+        <property name="infoResource" value="classpath:/context/properties/info.properties">
+        </property>
+    </bean>
+
+	<bean id="hessianService" class="com.focustech.cief.filemanage.dataserver.service.hessian.HessianServiceImpl"/>
+
+	<bean id="appResoruce" class="com.focustech.cief.filemanage.app.id.AppResource">
+		<property name="appIdResource" value="classpath:/appid/EveryDaySerialNumber.dat" />
+    </bean>
+
+	<bean id="appNumber" class="com.focustech.cief.filemanage.app.id.FileEveryDaySerialNumber" init-method="init">
+		<property name="resource" ref="appResoruce" />
+		<property name="width" value="7" />
+	</bean>
+
+	<bean id="appCache" class="com.focustech.cief.filemanage.app.service.impl.AppCache" init-method="init"/>
+</beans>
