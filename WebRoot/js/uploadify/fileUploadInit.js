@@ -54,7 +54,7 @@ function fileParam(){
 //处理选择文件服务器的Action的Url
 function getServerActionOperUrl(doWhat){
 	//当前应用服务器的ip
-	return "http://127.0.0.1:8018/fs/dataserver/" + doWhat + "?1=1";
+	return "http://120.77.15.13/fs/dataserver/" + doWhat + "?1=1";
 }
 
 //文件上传成功后默认的回调方法

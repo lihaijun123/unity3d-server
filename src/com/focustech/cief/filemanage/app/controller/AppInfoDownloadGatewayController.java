@@ -115,4 +115,5 @@ public class AppInfoDownloadGatewayController extends AbstractAppController{
 		}
 		return view;
 	}
+	
 }

@@ -27,7 +27,9 @@ import com.focustech.cief.filemanage.login.WxLoginFilter;
 import com.focustech.cief.filemanage.wxuser.model.WxUserInfo;
 import com.focustech.cief.filemanage.wxuser.service.WxUserInfoService;
 import com.focustech.common.utils.DateUtils;
+import com.focustech.common.utils.HttpUtil;
 import com.focustech.common.utils.StringUtils;
+import com.focustech.common.utils.TCUtil;
 
 /**
  * 
@@ -54,21 +56,13 @@ public class WxUserInfoController {
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) throws IOException {
-		/*String mobile = wxUserInfo.getMobile();
-		WxUserInfo userInfo = wxUserInfoService.exist(mobile);
-		if(userInfo != null){
-			//跳转到下载页面
-		}*/
-		Cookie[] cookies = request.getCookies();
-		for (Cookie cookie : cookies) {
-			String name = cookie.getName();
-			if("mobile".equals(name)){
-				WxUserInfo wxUserInfo = wxUserInfoService.exist(cookie.getValue());
-				if(wxUserInfo != null){
-					//跳转到下载页面
-					setUserToSession(request, response, wxUserInfo);
-					return "redirect:" + request.getSession().getAttribute("gtp");
-				}
+		String mobile = TCUtil.sv(request.getAttribute("mobile"));
+		if(StringUtils.isNotEmpty(mobile)){
+			WxUserInfo wxUserInfo = wxUserInfoService.exist(mobile);
+			if(wxUserInfo != null){
+				//跳转到下载页面
+				setUserToSession(request, response, wxUserInfo);
+				return "redirect:" + request.getSession().getAttribute("gtp");
 			}
 		}
 		return "/wxuser/login";
@@ -77,13 +71,15 @@ public class WxUserInfoController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(WxUserInfo wxUserInfo, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String mobile = wxUserInfo.getMobile();
-		WxUserInfo dbUser = wxUserInfoService.exist(mobile);
-		if(dbUser != null){
-			//跳转到下载
-			setUserToSession(request, response, dbUser);
-			return "redirect:" + request.getSession().getAttribute("gtp");
-		} else {
-			modelMap.put("message", "账号不存在，请注册！");
+		if(StringUtils.isNotEmpty(mobile)){
+			WxUserInfo dbUser = wxUserInfoService.exist(mobile);
+			if(dbUser != null){
+				//跳转到下载
+				setUserToSession(request, response, dbUser);
+				return "redirect:" + request.getSession().getAttribute("gtp");
+			} else {
+				modelMap.put("message", "账号不存在，请注册！");
+			}
 		}
 		return "/wxuser/login";
 	}

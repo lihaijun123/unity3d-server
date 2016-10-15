@@ -39,12 +39,12 @@
 <body>
 <div class="container mar_t200 mar_t200_ts">
 
-	<form class="form-signin" role="form" action="/fs/wxuser/login" method="post" class="form-horizontal">
+	<form id="myForm" class="form-signin" role="form" action="/fs/wxuser/login" method="post" class="form-horizontal">
 			<h2 class="mar_b20" style="text-align: center;">欢迎登录!</h2>
 			<div class="form-group">
 				<div class="input-group">
 					<span class="input-group-addon">手机</span></span>
-					<input class="form-control" id="mobile" name="mobile" type="text" maxlength=15 placeholder="请输入手机号码"/>
+					<input class="form-control" id="mobile" name="mobile" type="text" maxlength=11 placeholder="请输入手机号码"/>
 				</div>
 			</div>
 			<div class="form-group">
@@ -63,4 +63,32 @@
 	</form>
 
 </div>
+<script type="text/javascript" src="/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/js/jquery.validate.extend.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#myForm").validate({
+	    	onfocusout:function(element){$(element).valid();},
+	    	errorPlacement: function(error, element){
+	    		error.appendTo(element.parent().parent());
+	    	},
+	    	rules: {
+	    		mobile:{
+		    		required: true,
+		    		isMobile:true,
+		    		maxlength: 11
+		    	}
+	    	},
+	    	messages: {
+				mobile: {
+		    		required: "请输入手机号",
+		    		maxlength: "请输入{0}个字以内"
+		    	}
+	    	},
+	    	submitHandler:function(form){
+	    		form.submit();
+	    	}
+	    });
+	});
+</script>
 </body>
