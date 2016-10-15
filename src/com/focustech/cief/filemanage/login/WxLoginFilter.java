@@ -12,17 +12,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.focustech.common.utils.HttpUtil;
+
 /**
  *
  * *
  * @author lihaijun
  *
  */
-public class LoginFilter implements Filter {
-	public static final String SESSION_KEY = "loginInfo";
-	public static final String LOGIN_PAGE_NAME = "fs/login";
+public class WxLoginFilter implements Filter {
+	public static final String SESSION_KEY = "wxloginInfo";
+	public static final String LOGIN_PAGE_NAME = "fs/wxuser/login";
 	public static final String[] STATIC_RESOURCES = {"js", "images", "css", "fonts", "monitor.html", "index.html", "html", "video", "static"};
-	public static final String[] DYNAMIC_RESOURCES = {"/fs/i1/*", "/fs/rm/*", "/fs/login", "/fs/appbk/*", "/fs/app/download/*", "/index", "/fs/wxuser/*"};
+	public static final String[] DYNAMIC_RESOURCES = {"/fs/i1/*", "/fs/rm/*", "/fs/login", "/fs/appbk/*", "/index", "/fs/wxuser/register"};
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain fc) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest)req;
@@ -35,6 +37,9 @@ public class LoginFilter implements Filter {
 		} else {
 			if(sessinObj == null) {
 				HttpServletResponse response = (HttpServletResponse)resp;
+				request.getHeader("referer");
+				StringBuffer requestURL = request.getRequestURL();
+				request.getSession().setAttribute("gtp", requestURL.toString());
 				response.sendRedirect("/" + LOGIN_PAGE_NAME);
 			} else {
 				RequestThreadLocal.setLoginInfo(sessinObj);

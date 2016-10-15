@@ -31,5 +31,6 @@
 		<!-- app -->
 		<mapping class="com.focustech.cief.filemanage.app.model.AppInfo" />
 		<mapping class="com.focustech.cief.filemanage.app.model.AppInfoDetail" />
+		<mapping class="com.focustech.cief.filemanage.wxuser.model.WxUserInfo" />
 	</session-factory>
 </hibernate-configuration>

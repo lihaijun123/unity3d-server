@@ -1,5 +1,6 @@
 package com.focustech.cief.filemanage.wxuser.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ public class WxUserInfoServiceImpl implements WxUserInfoService<WxUserInfo> {
 
 	@Override
 	public void insertOrUpdate(WxUserInfo t) {
+		t.setAddTime(new Date());
 		userInfoDao.insertOrUpdate(t);
 	}
 

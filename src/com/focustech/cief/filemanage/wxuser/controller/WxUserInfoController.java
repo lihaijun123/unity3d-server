@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.focustech.cief.filemanage.dataserver.common.utils.DownloadUtil;
+import com.focustech.cief.filemanage.login.WxLoginFilter;
 import com.focustech.cief.filemanage.wxuser.model.WxUserInfo;
 import com.focustech.cief.filemanage.wxuser.service.WxUserInfoService;
 import com.focustech.common.utils.DateUtils;
@@ -51,13 +53,47 @@ public class WxUserInfoController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(WxUserInfo wxUserInfo, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) throws IOException {
-		String mobile = wxUserInfo.getMobile();
+	public String login(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		/*String mobile = wxUserInfo.getMobile();
 		WxUserInfo userInfo = wxUserInfoService.exist(mobile);
 		if(userInfo != null){
 			//跳转到下载页面
+		}*/
+		Cookie[] cookies = request.getCookies();
+		for (Cookie cookie : cookies) {
+			String name = cookie.getName();
+			if("mobile".equals(name)){
+				WxUserInfo wxUserInfo = wxUserInfoService.exist(cookie.getValue());
+				if(wxUserInfo != null){
+					//跳转到下载页面
+					setUserToSession(request, response, wxUserInfo);
+					return "redirect:" + request.getSession().getAttribute("gtp");
+				}
+			}
 		}
-		return "redirect:/fs/wxuser/register";
+		return "/wxuser/login";
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String login(WxUserInfo wxUserInfo, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String mobile = wxUserInfo.getMobile();
+		WxUserInfo dbUser = wxUserInfoService.exist(mobile);
+		if(dbUser != null){
+			//跳转到下载
+			setUserToSession(request, response, dbUser);
+			return "redirect:" + request.getSession().getAttribute("gtp");
+		} else {
+			modelMap.put("message", "账号不存在，请注册！");
+		}
+		return "/wxuser/login";
+	}
+
+	private void setUserToSession(HttpServletRequest request, HttpServletResponse response, WxUserInfo dbUser) {
+		request.getSession().setAttribute(WxLoginFilter.SESSION_KEY, dbUser);
+		Cookie ck = new Cookie("mobile", dbUser.getMobile());
+		ck.setPath("/");
+		ck.setMaxAge(365*24*60*60);
+		response.addCookie(ck);
 	}
 	/**
 	 * 
@@ -85,6 +121,8 @@ public class WxUserInfoController {
 	public String register(WxUserInfo wxUserInfo, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String mobile = wxUserInfo.getMobile();
 		String name = wxUserInfo.getName();
+		String company = wxUserInfo.getCompany();
+		String job = wxUserInfo.getJob();
 		String msg = "";
 		if(StringUtils.isEmpty(mobile)){
 			msg = "手机号码不能为空";
@@ -92,13 +130,21 @@ public class WxUserInfoController {
 		if(StringUtils.isEmpty(name)){
 			msg = "姓名不能为空";
 		}
-		if(StringUtils.isNotEmpty(msg)){
-			WxUserInfo userInfo = wxUserInfoService.exist(mobile);
-			if(userInfo == null){
+		if(StringUtils.isEmpty(company)){
+			msg = "公司不能为空";
+		}
+		if(StringUtils.isEmpty(job)){
+			msg = "职位不能为空";
+		}
+		if(StringUtils.isEmpty(msg)){
+			WxUserInfo dbUser = wxUserInfoService.exist(mobile);
+			if(dbUser == null){
 				wxUserInfoService.insertOrUpdate(wxUserInfo);
 			}
-			if(userInfo.getSn() != null){
-				//跳转到下载页面
+			if(wxUserInfo.getSn() != null){
+				//跳转到下载
+				setUserToSession(request, response, wxUserInfo);
+				return "redirect:" + request.getSession().getAttribute("gtp");
 			}
 		}
 		modelMap.put("message", msg);
