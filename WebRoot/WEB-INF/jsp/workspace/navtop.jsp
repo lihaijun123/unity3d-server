@@ -23,7 +23,7 @@
    <div class="collapse navbar-collapse" id="example-navbar-collapse">
       <ul class="nav navbar-nav">
 		<li id="index_1"><a href="/fs/xml/list">文件管理</a></li>
-		<li id="index_2"><a href="/fs/user/list">注册用户</a></li>
+		<li id="index_2"><a href="/fs/user/list">App注册用户</a></li>
 		<li id="index_3"><a href="/fs/appbkmanage/list">App发布</a></li>
 		<li id="index_4" class="dropdown">
          	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -37,6 +37,7 @@
                <li><a href="/fs/chart/appdownload">App下载</a></li>
             </ul>
          </li>
+        <li id="index_5"><a href="/fs/wxuser/list">微信注册用户</a></li>
       </ul>
       <p class="navbar-text navbar-right">&nbsp;</p>
       <p class="navbar-text navbar-right">&nbsp;</p>

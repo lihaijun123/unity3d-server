@@ -37,7 +37,7 @@ public class WxLoginFilter implements Filter {
 		String servletPath = request.getServletPath();
 		boolean isPass = false;
 		boolean urlContainSessionId = false;
-		if(isIncludePassPath(servletPath)){
+		if(isIncludePassPath(servletPath) || isNotValidOfPreFilter(request)){
 			isPass = true;
 		} else {
 			String mobile = request.getParameter("mobile");
@@ -135,5 +135,14 @@ public class WxLoginFilter implements Filter {
 
 	public boolean isNeedRewriteUrl(String url){
 		return url.contains("/fs/app/download");
+	}
+	
+	public boolean isNotValidOfPreFilter(HttpServletRequest request){
+		String servletPath = request.getServletPath();
+		int filterIdx = TCUtil.iv(request.getAttribute("filterIdx"));
+		if(filterIdx == 1){
+			return !servletPath.contains("/fs/app/download/") && !servletPath.contains("/fs/appbk/");
+		}
+		return false;
 	}
 }

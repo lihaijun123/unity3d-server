@@ -27,12 +27,11 @@ import com.focustech.cief.filemanage.login.WxLoginFilter;
 import com.focustech.cief.filemanage.wxuser.model.WxUserInfo;
 import com.focustech.cief.filemanage.wxuser.service.WxUserInfoService;
 import com.focustech.common.utils.DateUtils;
-import com.focustech.common.utils.HttpUtil;
 import com.focustech.common.utils.StringUtils;
 import com.focustech.common.utils.TCUtil;
 
 /**
- * 
+ * 微信注册用户
  * *
  * 
  * @author lihaijun
@@ -44,7 +43,7 @@ public class WxUserInfoController {
 	@Autowired
 	private WxUserInfoService<WxUserInfo> wxUserInfoService;
 	
-	private static final String[] xlsColumnAry = new String[]{"序号", "AppName", "手机号", "邮箱", "注册时间"};
+	private static final String[] xlsColumnAry = new String[]{"序号", "姓名", "手机号", "公司", "职位", "注册时间"};
 	/**
 	 * 
 	 * *
@@ -136,6 +135,8 @@ public class WxUserInfoController {
 			WxUserInfo dbUser = wxUserInfoService.exist(mobile);
 			if(dbUser == null){
 				wxUserInfoService.insertOrUpdate(wxUserInfo);
+			} else {
+				msg = "该手机号已经存在，请更换或者返回登录";
 			}
 			if(wxUserInfo.getSn() != null){
 				//跳转到下载
@@ -144,6 +145,7 @@ public class WxUserInfoController {
 			}
 		}
 		modelMap.put("message", msg);
+		modelMap.put("user", wxUserInfo);
 		return "/wxuser/register";
 	}
 	/**
@@ -158,7 +160,7 @@ public class WxUserInfoController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		modelMap.put("list", wxUserInfoService.list());
-    	return "/user/list";
+    	return "/wxuser/list";
     }
 	/**
 	 * 
@@ -175,7 +177,7 @@ public class WxUserInfoController {
 		if(dirFile.exists()){
 			try {
 				List<WxUserInfo> list = wxUserInfoService.list();
-				String xlsFileName = "注册用户列表_" + DateUtils.getCurDate("yyyyMMddHHmmss")+ ".xls";
+				String xlsFileName = "微信注册用户列表_" + DateUtils.getCurDate("yyyyMMddHHmmss")+ ".xls";
 				String xlsPath = dirFile.getPath() + xlsFileName;
 				resultSetToExcel(xlsPath, "列表", list);
 				DownloadUtil.download(xlsPath, xlsFileName, request, response);
@@ -242,8 +244,12 @@ public class WxUserInfoController {
 			cell = row.createCell((short) 3);
 			cell.setCellType(HSSFCell.CELL_TYPE_STRING);
 			cell.setEncoding(HSSFCell.ENCODING_UTF_16);
-			cell.setCellValue("");
+			cell.setCellValue(WxUserInfo.getCompany());
 			cell = row.createCell((short) 4);
+			cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+			cell.setEncoding(HSSFCell.ENCODING_UTF_16);
+			cell.setCellValue(WxUserInfo.getJob());
+			cell = row.createCell((short) 5);
 			cell.setCellType(HSSFCell.CELL_TYPE_STRING);
 			cell.setEncoding(HSSFCell.ENCODING_UTF_16);
 			cell.setCellValue(DateUtils.formatDate(WxUserInfo.getAddTime(), DateUtils.DEFAULT_FORMATE_ALL));

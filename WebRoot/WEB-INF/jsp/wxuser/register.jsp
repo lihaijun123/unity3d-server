@@ -85,6 +85,11 @@
 						<button type="submit" class="btn btn-primary btn-lg w100">注册</button>
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-sm-6 ">
+						已有账号？<a href="/fs/wxuser/login">返回登录</a>
+					</div>
+				</div>
 			</div>
 			<font color="red">${message }</font>
 	</form>

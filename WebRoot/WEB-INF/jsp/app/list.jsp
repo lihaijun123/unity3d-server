@@ -12,6 +12,7 @@
 </head>
 <body style="margin-top: 50px;">
 	<%@include file="../workspace/navtop.jsp" %>
+	<input type="hidden" id="tab_index" value="3"/>
 	<div class="table-responsive">
 		<table class="table table-hover" >
 		 	<caption>App发布</caption>

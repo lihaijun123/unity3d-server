@@ -22,7 +22,7 @@ public class LoginFilter implements Filter {
 	public static final String SESSION_KEY = "loginInfo";
 	public static final String LOGIN_PAGE_NAME = "fs/login";
 	public static final String[] STATIC_RESOURCES = {"js", "images", "css", "fonts", "monitor.html", "index.html", "html", "video", "static"};
-	public static final String[] DYNAMIC_RESOURCES = {"/fs/i1/*", "/fs/rm/*", "/fs/login", "/fs/appbk/*", "/fs/app/download/*", "/index", "/fs/wxuser/*"};
+	public static final String[] DYNAMIC_RESOURCES = {"/fs/i1/*", "/fs/rm/*", "/fs/login", "/fs/appbk/*", "/fs/app/download/*", "/index", "/fs/wxuser/login", "/fs/wxuser/register"};
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain fc) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest)req;
@@ -42,6 +42,7 @@ public class LoginFilter implements Filter {
 			}
 		}
 		if(isPass){
+			request.setAttribute("filterIdx", 1);
 			fc.doFilter(req, resp);
 		}
 	}
