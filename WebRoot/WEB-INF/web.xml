@@ -120,39 +120,39 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-	    <servlet-name>default</servlet-name>
+	    <servlet-name>resin-file</servlet-name>
 	    <url-pattern>/js/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-	    <servlet-name>default</servlet-name>
+	    <servlet-name>resin-file</servlet-name>
 	    <url-pattern>/images/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-	    <servlet-name>default</servlet-name>
+	    <servlet-name>resin-file</servlet-name>
 	    <url-pattern>/css/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-	    <servlet-name>default</servlet-name>
+	    <servlet-name>resin-file</servlet-name>
 	    <url-pattern>/fonts/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-	    <servlet-name>default</servlet-name>
+	    <servlet-name>resin-file</servlet-name>
 	    <url-pattern>/video/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-	    <servlet-name>default</servlet-name>
+	    <servlet-name>resin-file</servlet-name>
 	    <url-pattern>/static/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-	    <servlet-name>default</servlet-name>
+	    <servlet-name>resin-file</servlet-name>
 	    <url-pattern>/monitor.html</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-	    <servlet-name>default</servlet-name>
+	    <servlet-name>resin-file</servlet-name>
 	    <url-pattern>/index.html</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-	    <servlet-name>default</servlet-name>
+	    <servlet-name>resin-file</servlet-name>
 	    <url-pattern>/crossdomain.xml</url-pattern>
 	</servlet-mapping>
 	<!-- JNDI config -->

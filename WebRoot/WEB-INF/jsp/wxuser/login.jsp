@@ -33,6 +33,18 @@
 			.mar_t200_ts{margin-top:20px;}
 			body{background:url(/images/login_bj_ts.jpg) top center no-repeat;}
 		}
+		/*jquery validate*/
+		input.error { border: 1px solid red; }
+		label.error {
+		
+		  padding-left: 16px;
+		
+		  padding-bottom: 2px;
+		
+		  font-weight: bold;
+		
+		  color: #EA5200;
+		}
 	</style>
 
 </head>
