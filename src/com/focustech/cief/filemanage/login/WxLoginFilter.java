@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.focustech.cief.filemanage.wxuser.model.WxUserInfo;
+import com.focustech.common.utils.Encode;
 import com.focustech.common.utils.StringUtils;
 import com.focustech.common.utils.TCUtil;
 
@@ -24,6 +25,7 @@ import com.focustech.common.utils.TCUtil;
  *
  */
 public class WxLoginFilter implements Filter {
+	public static final String SID = "sid";
 	public static final String SESSION_KEY = "wxloginInfo";
 	public static final String LOGIN_PAGE_NAME = "fs/wxuser/login";
 	public static final String[] STATIC_RESOURCES = {};
@@ -40,22 +42,22 @@ public class WxLoginFilter implements Filter {
 		if(isIncludePassPath(servletPath) || isNotValidOfPreFilter(request)){
 			isPass = true;
 		} else {
-			String mobile = request.getParameter("mobile");
+			String mobile = request.getParameter(WxLoginFilter.SID);
 			if(StringUtils.isEmpty(mobile)){
-				mobile = TCUtil.sv(request.getAttribute("mobile"));
+				mobile = TCUtil.sv(request.getAttribute(WxLoginFilter.SID));
 			} else {
 				urlContainSessionId = true;
 			}
 			if(sessinObj == null) {
 				if(StringUtils.isEmpty(mobile)){
-					mobile = TCUtil.sv(request.getSession().getAttribute("mobile"));
+					mobile = TCUtil.sv(request.getSession().getAttribute(WxLoginFilter.SID));
 				}
 				if(StringUtils.isEmpty(mobile)){
 					Cookie[] cookies = request.getCookies();
 					if(cookies != null){
 						for (Cookie cookie : cookies) {
 							String name = cookie.getName();
-							if("mobile".equals(name)){
+							if(WxLoginFilter.SID.equals(name)){
 								mobile = cookie.getValue();
 							}
 						}
@@ -67,11 +69,12 @@ public class WxLoginFilter implements Filter {
 					response.sendRedirect("/" + LOGIN_PAGE_NAME);
 				} else {
 					isPass = true;
-					request.setAttribute("mobile", mobile);
-					request.getSession().setAttribute("mobile", mobile);
+					request.setAttribute(WxLoginFilter.SID, mobile);
+					request.getSession().setAttribute(WxLoginFilter.SID, mobile);
 					String requestUrl = request.getRequestURI().toString();
 					if(isNeedRewriteUrl(requestUrl) && !urlContainSessionId){
-						String rewriteUrl = requestUrl + "?mobile=" + mobile;
+						String getRewriteUrl = requestUrl + "?" + WxLoginFilter.SID + "=" + Encode.encoder(mobile);
+						String rewriteUrl = getRewriteUrl;
 						response.sendRedirect(rewriteUrl);
 						return;
 					}
@@ -82,8 +85,8 @@ public class WxLoginFilter implements Filter {
 				String requestUrl = request.getRequestURI().toString();
 				if(isNeedRewriteUrl(requestUrl) && !urlContainSessionId){
 					WxUserInfo wxUserInfo = (WxUserInfo)sessinObj;
-					String rewriteUrl = requestUrl + "?mobile=" + wxUserInfo.getMobile();
-					request.setAttribute("mobile", wxUserInfo.getMobile());
+					String rewriteUrl = requestUrl + "?" + WxLoginFilter.SID + "=" + Encode.encoder(wxUserInfo.getMobile());
+					request.setAttribute(WxLoginFilter.SID, wxUserInfo.getMobile());
 					response.sendRedirect(rewriteUrl);
 					return;
 				}

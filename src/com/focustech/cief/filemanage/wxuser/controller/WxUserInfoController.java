@@ -27,6 +27,7 @@ import com.focustech.cief.filemanage.login.WxLoginFilter;
 import com.focustech.cief.filemanage.wxuser.model.WxUserInfo;
 import com.focustech.cief.filemanage.wxuser.service.WxUserInfoService;
 import com.focustech.common.utils.DateUtils;
+import com.focustech.common.utils.Encode;
 import com.focustech.common.utils.StringUtils;
 import com.focustech.common.utils.TCUtil;
 
@@ -55,9 +56,9 @@ public class WxUserInfoController {
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) throws IOException {
-		String mobile = TCUtil.sv(request.getAttribute("mobile"));
+		String mobile = TCUtil.sv(request.getAttribute(WxLoginFilter.SID));
 		if(StringUtils.isNotEmpty(mobile)){
-			WxUserInfo wxUserInfo = wxUserInfoService.exist(mobile);
+			WxUserInfo wxUserInfo = wxUserInfoService.exist(Encode.decoder(mobile));
 			if(wxUserInfo != null){
 				//跳转到下载页面
 				setUserToSession(request, response, wxUserInfo);
@@ -85,7 +86,7 @@ public class WxUserInfoController {
 
 	private void setUserToSession(HttpServletRequest request, HttpServletResponse response, WxUserInfo dbUser) {
 		request.getSession().setAttribute(WxLoginFilter.SESSION_KEY, dbUser);
-		Cookie ck = new Cookie("mobile", dbUser.getMobile());
+		Cookie ck = new Cookie(WxLoginFilter.SID, Encode.encoder(dbUser.getMobile()));
 		ck.setPath("/");
 		ck.setMaxAge(365*24*60*60);
 		response.addCookie(ck);
