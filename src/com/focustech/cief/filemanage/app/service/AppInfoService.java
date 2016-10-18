@@ -16,6 +16,7 @@ public interface AppInfoService<T> {
 	T select(Long sn);
 
 	List<T> list(Integer status);
+	List<T> list(Integer status, boolean isNeedReg);
 	
 	String createQrCodeContent(T app);
 

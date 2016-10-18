@@ -39,6 +39,14 @@
 			</td>
 		</tr>
 		<tr>
+			<td><font color="red">*</font>是否需要注册：</td>
+			<td >
+				<input type="radio" value="0" name="isNeedReg" checked="checked"/>否
+				<input type="radio" value="1" name="isNeedReg" />是
+
+			</td>
+		</tr>
+		<tr>
 			<td><font color="red">*</font>状态：</td>
 			<td >
 				<input type="radio" value="3" name="status" checked="checked"/>审核通过

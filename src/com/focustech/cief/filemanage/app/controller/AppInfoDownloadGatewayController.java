@@ -44,7 +44,7 @@ public class AppInfoDownloadGatewayController extends AbstractAppController{
 	 * @param request
 	 * @param response
 	 */
-	@RequestMapping(value = "/{encryptAppSn}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{isNeedReg}/{encryptAppSn}", method = RequestMethod.GET)
 	public String viewPlistFile(@PathVariable String encryptAppSn, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response){
 		log.info(encryptAppSn);
 		boolean weixinBrowser = isWeixinBrowser(request);
@@ -96,9 +96,9 @@ public class AppInfoDownloadGatewayController extends AbstractAppController{
 					if(!isThirdUrl){
 						if(AppWorkspaceConst.SYSTEM_TYPE_2 == mobileSystemType ){
 							//appUrl = httpsServerUrl + "/fs/appbk/fbk" + appId + ".plist";
-							appUrl = "itms-services://?action=download-manifest&url=" + httpsServerUrl + "/fs/appbk/fbk" + appId + ".plist";
+							appUrl = "itms-services://?action=download-manifest&url=" + httpsServerUrl + "/fs/appbk/" + appInfo.getIsNeedReg() + "fbk" + appId + ".plist";
 						} else {
-							appUrl = httpServerUrl + "/fs/appbk/fbk" + appId;
+							appUrl = httpServerUrl + "/fs/appbk/" + appInfo.getIsNeedReg() + "/fbk" + appId;
 						}
 					} else {
 						if(!TCUtil.isEmpty(thirdUrl) && (!thirdUrl.startsWith("http://") && !thirdUrl.startsWith("https://"))){

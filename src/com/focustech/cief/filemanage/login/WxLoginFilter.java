@@ -26,8 +26,8 @@ import com.focustech.common.utils.TCUtil;
 public class WxLoginFilter implements Filter {
 	public static final String SESSION_KEY = "wxloginInfo";
 	public static final String LOGIN_PAGE_NAME = "fs/wxuser/login";
-	public static final String[] STATIC_RESOURCES = {"js", "images", "css", "fonts", "monitor.html", "index.html", "html", "video", "static"};
-	public static final String[] DYNAMIC_RESOURCES = {"/fs/i1/*", "/fs/rm/*", "/fs/login", "/index", "/fs/wxuser/register"};
+	public static final String[] STATIC_RESOURCES = {};
+	public static final String[] DYNAMIC_RESOURCES = {};
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain fc) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest)req;
@@ -141,7 +141,7 @@ public class WxLoginFilter implements Filter {
 		String servletPath = request.getServletPath();
 		int filterIdx = TCUtil.iv(request.getAttribute("filterIdx"));
 		if(filterIdx == 1){
-			return !servletPath.contains("/fs/app/download/") && !servletPath.contains("/fs/appbk/");
+			return !servletPath.contains("/fs/app/download/1/") && !servletPath.contains("/fs/appbk/1/");
 		}
 		return false;
 	}

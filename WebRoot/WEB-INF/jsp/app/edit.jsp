@@ -20,8 +20,6 @@
 	</div>
 	<div style="margin-left: 250px;">
 
-
-
 	<table class="table">
 		<form:hidden path="sn"/>
 		<tr>
@@ -41,6 +39,20 @@
 			<td><font color="red">*</font>描述：</td>
 			<td >
 				<form:textarea path="remark" cols="30" rows="5"/>
+			</td>
+		</tr>
+		<tr>
+			<td><font color="red">*</font>是否需要注册：</td>
+			<td >
+				<c:if test="${app.isNeedReg eq 0}">
+					<input type="radio" value="0" name="isNeedReg" checked="checked"/>否
+					<input type="radio" value="1" name="isNeedReg" />是
+				</c:if>
+				<c:if test="${app.isNeedReg eq 1}">
+					<input type="radio" value="0" name="isNeedReg" />否
+					<input type="radio" value="1" name="isNeedReg" checked="checked"/>是
+				</c:if>
+
 			</td>
 		</tr>
 		<tr>

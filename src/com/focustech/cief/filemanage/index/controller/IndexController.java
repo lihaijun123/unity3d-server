@@ -28,8 +28,22 @@ public class IndexController extends AbstractAppController{
 	private AppInfoService<AppInfo> appInfoService;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String index(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response){
-		List<AppInfo> list = appInfoService.list(3);
+	public String index1(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response){
+		List<AppInfo> list = appInfoService.list(3, true);
+		modelMap.addAttribute("list", list);
+		return "/index";
+	}
+	/**
+	 * 
+	 * *
+	 * @param modelMap
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/0", method = RequestMethod.GET)
+	public String index0(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response){
+		List<AppInfo> list = appInfoService.list(3, false);
 		modelMap.addAttribute("list", list);
 		return "/index";
 	}

@@ -112,8 +112,8 @@ public class AppInfoRpcController  extends AbstractAppController {
 	 * @param request
 	 * @param response
 	 */
-	@RequestMapping(value = "/{fileName}", method = RequestMethod.GET)
-	public void downloadFile(@PathVariable String fileName, HttpServletRequest request, HttpServletResponse response){
+	@RequestMapping(value = "/{isNeedReg}/{fileName}", method = RequestMethod.GET)
+	public void downloadFile(@PathVariable String isNeedReg, @PathVariable String fileName, HttpServletRequest request, HttpServletResponse response){
 		try {
 			//非移动端禁止下载
 			/*if(getMobileType(request) <= 0){
@@ -131,6 +131,10 @@ public class AppInfoRpcController  extends AbstractAppController {
 				}
 				appDetail = appCache.get(appId, AppInfoDetail.class);
 				if(appDetail != null){
+					if(!TCUtil.sv(appDetail.getApp().getIsNeedReg()).equals(isNeedReg)){
+						response.getWriter().print("forbidden download");
+						return;
+					}
 					Long fileSn = appDetail.getAppFileSn();
 					if(fileSn != null){
 						String suffix = "";

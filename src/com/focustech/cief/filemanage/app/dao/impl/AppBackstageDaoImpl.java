@@ -29,4 +29,15 @@ public class AppBackstageDaoImpl extends OssHibernateDaoSupport<AppInfo> impleme
 		return c.list();
 	}
 
+	@Override
+	public List<AppInfo> list(Integer status, boolean isNeedReg) {
+		Criteria c = getCurrentSession().createCriteria(AppInfo.class);
+		if(status != null){
+			c.add(Restrictions.or(Restrictions.eq("status", status), Restrictions.eq("status", 33)));
+		}
+		c.add(Restrictions.eq("isNeedReg", isNeedReg ? 1 : 0));
+		c.addOrder(Order.desc("updateTime"));
+		return c.list();
+	}
+
 }

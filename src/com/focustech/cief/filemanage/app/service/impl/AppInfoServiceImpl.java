@@ -182,8 +182,17 @@ public class AppInfoServiceImpl implements AppInfoService<AppInfo>{
 	 * @return
 	 */
 	public String createQrCodeContent(AppInfo app) {
-		String homeUrlPrefix = httpServerUrl + "/fs/app/download/";
+		String homeUrlPrefix = httpServerUrl + "/fs/app/download/" + app.getIsNeedReg() + "/";
 		String encryptSn = EncryptUtil.encode(app.getSn());
 		return homeUrlPrefix + encryptSn;
+	}
+	@Override
+	public List<AppInfo> list(Integer status, boolean isNeedReg) {
+		List<AppInfo> list = appBackstageDao.list(status, isNeedReg);
+		for (AppInfo appInfo : list) {
+			setIconFileInfo(appInfo);
+			appInfo.setQrCodeContent(createQrCodeContent(appInfo));
+		}
+		return list;
 	}
 }

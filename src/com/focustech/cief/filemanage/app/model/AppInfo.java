@@ -35,6 +35,7 @@ public class AppInfo extends BaseEntity{
 	private String remark;
 	private Long appIconFileSn;
 	private Integer status;
+	private Integer isNeedReg;
 	@OneToMany(mappedBy = "app", cascade = CascadeType.ALL)
 	private List<AppInfoDetail> detail = new ArrayList<AppInfoDetail>();
 	@Transient
@@ -89,4 +90,11 @@ public class AppInfo extends BaseEntity{
 	public void setQrCodeContent(String qrCodeContent) {
 		this.qrCodeContent = qrCodeContent;
 	}
+	public Integer getIsNeedReg() {
+		return isNeedReg;
+	}
+	public void setIsNeedReg(Integer isNeedReg) {
+		this.isNeedReg = isNeedReg;
+	}
+	
 }
