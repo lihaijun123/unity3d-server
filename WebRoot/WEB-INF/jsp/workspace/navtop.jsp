@@ -38,6 +38,7 @@
             </ul>
          </li>
         <li id="index_5"><a href="/fs/wxuser/list">微信注册用户</a></li>
+        <li id="index_5"><a href="/fs/rm/feedback/list">意见反馈</a></li>
       </ul>
       <p class="navbar-text navbar-right">&nbsp;</p>
       <p class="navbar-text navbar-right">&nbsp;</p>
