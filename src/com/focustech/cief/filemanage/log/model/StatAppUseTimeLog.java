@@ -7,9 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import com.focustech.cief.filemanage.user.model.UserInfo;
 
 /**
  * *
@@ -21,11 +18,12 @@ import com.focustech.cief.filemanage.user.model.UserInfo;
 public class StatAppUseTimeLog {
 	private Long sn;
 	private Long userId;
+	private String userInfo;
 	private String appName;
 	private String useTime;
 	private Date addDate;
 
-	private UserInfo userInfo;
+	//private UserInfo userInfo;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,11 +57,24 @@ public class StatAppUseTimeLog {
 	public void setAddDate(Date addDate) {
 		this.addDate = addDate;
 	}
-	@Transient
+	/*@Transient
 	public UserInfo getUserInfo() {
 		return userInfo;
 	}
 	public void setUserInfo(UserInfo userInfo) {
+		this.userInfo = userInfo;
+	}
+	public String getUserinfo() {
+		return userinfo;
+	}
+	public void setUserinfo(String userinfo) {
+		this.userinfo = userinfo;
+	}
+	*/
+	public String getUserInfo() {
+		return userInfo;
+	}
+	public void setUserInfo(String userInfo) {
 		this.userInfo = userInfo;
 	}
 

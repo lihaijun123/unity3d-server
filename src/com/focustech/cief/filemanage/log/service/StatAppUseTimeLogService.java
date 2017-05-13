@@ -17,6 +17,7 @@ public interface StatAppUseTimeLogService<T> {
 	void update(T t);
 
 	T select(String appName, Long userId);
+	T select(String appName, String userInfo);
 
 	public List<StatAppUseTimeLog> list();
 }

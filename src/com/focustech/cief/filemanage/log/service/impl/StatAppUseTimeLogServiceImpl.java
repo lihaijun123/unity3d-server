@@ -35,7 +35,7 @@ public class StatAppUseTimeLogServiceImpl implements StatAppUseTimeLogService<St
 	public StatAppUseTimeLog select(String appName, Long userId) {
 		return appUseTimeLogDao.select(appName, userId);
 	}
-
+	
 	@Override
 	public void update(StatAppUseTimeLog t) {
 		appUseTimeLogDao.update(t);
@@ -43,9 +43,9 @@ public class StatAppUseTimeLogServiceImpl implements StatAppUseTimeLogService<St
 
 	@Override
 	public List<StatAppUseTimeLog> list() {
-		List<StatAppUseTimeLog> filter = new ArrayList<StatAppUseTimeLog>();
+		//List<StatAppUseTimeLog> filter = new ArrayList<StatAppUseTimeLog>();
 		List<StatAppUseTimeLog> list = appUseTimeLogDao.list();
-		for (StatAppUseTimeLog statAppUseTimeLog : list) {
+		/*for (StatAppUseTimeLog statAppUseTimeLog : list) {
 			Long userId = statAppUseTimeLog.getUserId();
 			if(userId != null){
 				UserInfo userInfo = userInfoDao.select(userId);
@@ -55,6 +55,12 @@ public class StatAppUseTimeLogServiceImpl implements StatAppUseTimeLogService<St
 				}
 			}
 		}
-		return filter;
+		return filter;*/
+		return list;
+	}
+
+	@Override
+	public StatAppUseTimeLog select(String appName, String userInfo) {
+		return appUseTimeLogDao.select(appName, userInfo);
 	}
 }

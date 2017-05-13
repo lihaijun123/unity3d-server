@@ -42,4 +42,12 @@ public class StatAppUseTimeLogDaoImpl extends OssHibernateDaoSupport<StatAppUseT
 		criteria.addOrder(Order.desc("appName"));
 		return criteria.list();
 	}
+
+	@Override
+	public StatAppUseTimeLog select(String appName, String userInfo) {
+		Criteria criteria = getCurrentSession().createCriteria(StatAppUseTimeLog.class);
+		criteria.add(Restrictions.eq("appName", appName));
+		criteria.add(Restrictions.eq("userInfo", userInfo));
+		return (StatAppUseTimeLog) criteria.uniqueResult();
+	}
 }

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.focustech.cief.filemanage.hx.controller.AbstractController;
 import com.focustech.cief.filemanage.log.model.StatAppUseTimeLog;
 import com.focustech.cief.filemanage.log.service.StatAppUseTimeLogService;
-import com.focustech.common.utils.EncryptUtil;
 import com.focustech.common.utils.MathUtils;
 import com.focustech.common.utils.StringUtils;
 import com.focustech.common.utils.TCUtil;
@@ -49,12 +48,13 @@ public class StatAppUseTimeLogRmController extends AbstractController{
 	public void record(String userId, String appName, String useTime, HttpServletRequest request, HttpServletResponse response) throws IOException{
 		if(StringUtils.isNotEmpty(userId) && StringUtils.isNotEmpty(appName) && StringUtils.isNotEmpty(useTime)){
 			try {
-				Long decode = EncryptUtil.decode(userId);
+				//Long decode = EncryptUtil.decode(userId);
 				lock.lock();
-				StatAppUseTimeLog appUseTimeLog = appUseTimeLogService.select(appName, decode);
+				String userInfo = userId;
+				StatAppUseTimeLog appUseTimeLog = appUseTimeLogService.select(appName, userInfo);
 				if(appUseTimeLog == null){
 					appUseTimeLog = new StatAppUseTimeLog();
-					appUseTimeLog.setUserId(decode);
+					appUseTimeLog.setUserId(null);
 					appUseTimeLog.setAppName(appName);
 					appUseTimeLog.setUseTime(useTime);
 					appUseTimeLog.setAddDate(new Date());
