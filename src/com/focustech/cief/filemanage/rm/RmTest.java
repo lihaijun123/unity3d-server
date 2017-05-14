@@ -12,7 +12,7 @@ public class RmTest {
 	public static void main(String[] arg){
 		FntRpc fntRpc = new FntRpc();
 		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
-		qparams.add(new BasicNameValuePair("conent", "意见反馈"));
+		qparams.add(new BasicNameValuePair("conent", "意见反馈33344"));
 		fntRpc.httpRequest("/fs/rm/feedback", qparams, HttpMethod.POST);
 	}
 }
