@@ -45,7 +45,7 @@ public class FeedBackRmController extends AbstractController{
 	 * @throws IOException
 	 */
 	@RequestMapping(method = RequestMethod.POST)
-	public void record(String conent, String userInfo, HttpServletRequest request, HttpServletResponse response) throws IOException{
+	public void record(String conent, String contact, HttpServletRequest request, HttpServletResponse response) throws IOException{
 		if(StringUtils.isNotEmpty(conent)){
 			try {
 				//Long decode = EncryptUtil.decode(userId);
@@ -53,8 +53,8 @@ public class FeedBackRmController extends AbstractController{
 				FeedBack feedBack = new FeedBack();
 				feedBack.setContent(conent);
 				feedBack.setAddTime(new Date());
-				if(StringUtils.isNotEmpty(userInfo)){
-					feedBack.setUserInfo(userInfo);
+				if(StringUtils.isNotEmpty(contact)){
+					feedBack.setUserInfo(contact);
 				}
 				feedBackService.insertOrUpdate(feedBack);
 			} catch (Exception e) {

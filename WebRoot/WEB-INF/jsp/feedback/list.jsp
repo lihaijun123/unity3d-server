@@ -31,6 +31,7 @@
       <thead>
          <tr>
             <th>序号</th>
+            <th>联系方式</th>
             <th>反馈内容</th>
             <th>时间</th>
          </tr>
@@ -39,6 +40,7 @@
       	<c:forEach var="itm" items="${list }" varStatus="status">
          <tr>
             <td>${status.index + 1 }</td>
+            <td>${itm.userInfo }</td>
             <td>${itm.content }</td>
             <td>${itm.addTime }</td>
          </tr>

@@ -57,6 +57,7 @@ public class StatAppUseTimeLogRmController extends AbstractController{
 					appUseTimeLog.setUserId(null);
 					appUseTimeLog.setAppName(appName);
 					appUseTimeLog.setUseTime(useTime);
+					appUseTimeLog.setUserInfo(userInfo);
 					appUseTimeLog.setAddDate(new Date());
 				} else {
 					String ut = appUseTimeLog.getUseTime();

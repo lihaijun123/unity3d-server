@@ -29,7 +29,7 @@ import org.springframework.http.HttpMethod;
 public abstract class AbstractRpc {
 	private static final Logger log = LoggerFactory.getLogger(AbstractRpc.class);
 	protected static String URL_TEST = "http://127.0.0.1:8018";
-	protected static String URL_RELEASE = "http://139.196.173.139:8888";
+	protected static String URL_RELEASE = "http://120.77.15.13";
 	protected static String URL_THIRD = "http://www.xinlijiaju.com";
 	/**
 	 * 

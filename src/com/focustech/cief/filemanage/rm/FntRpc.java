@@ -4,7 +4,7 @@ public class FntRpc extends AbstractRpc {
 
 	@Override
 	public String getProtocal() {
-		return URL_TEST;
+		return URL_RELEASE;
 	}
 
 }

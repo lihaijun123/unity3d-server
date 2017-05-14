@@ -41,7 +41,7 @@
          <tr>
             <td>${status.index + 1 }</td>
             <td>${itm.appName }</td>
-            <td>${itm.userInfo.mobile } ${itm.userInfo.email }</td>
+           	<td>${itm.userInfo }</td>
             <td>${itm.useTime }</td>
          </tr>
       	</c:forEach>
