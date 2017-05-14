@@ -49,7 +49,7 @@
 			<div class="form-group">
 				<div class="input-group">
 					<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-					<input class="form-control" id="password" name="password" type="password" maxlength=11 placeholder="请输入密码"/>
+					<input class="form-control" id="password" name="password" type="password" maxlength=20 placeholder="请输入密码"/>
 				</div>
 			</div>
 			<div class="form-group">
